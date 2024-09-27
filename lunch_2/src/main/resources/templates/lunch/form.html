@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>ランチ フォーム</title>
+</head>
+<body>
+    <!-- タイトル：登録 or 編集 -->
+    <h2 th:if="${lunchForm.isNew}">新規ランチ登録</h2>
+    <h2 th:unless="${lunchForm.isNew}">ランチ編集</h2>
+    <!-- アクション：登録 or 編集 -->
+    <form th:action="${lunchForm.isNew} ? @{/lunches/save} : @{/lunches/update}"
+        th:object="${lunchForm}" method="post">
+        <!-- idは更新時に必要のため、hiddenで持つ -->
+        <input type="hidden" th:field="*{id}">
+        <table>
+            <tr>
+                <th>メニュー</th>
+                <td>
+                    <input type="text" th:field="*{menu}">
+                </td>
+            </tr>
+			<tr>
+			     <th>お店</th>
+			     <td>
+			         <input type="text" th:field="*{shop}">
+			     </td>
+			 </tr>		
+			 <tr>
+			      <th>値段</th>
+			      <td>
+			          <input type="text" th:field="*{price}">
+			      </td>
+			  </tr>	
+			  <tr>
+			  	  <th>前回利用日</th>
+				  <td>
+				      <input type="date" th:field="*{recentDate}">
+				  </td>
+			  </tr>		 
+			  <tr>
+			       <th>回数</th>
+			       <td>
+			           <input type="text" th:field="*{times}">
+			       </td>
+			   </tr>	
+			   <tr>
+			        <th>評価</th>
+			        <td>
+			            <input type="text" th:field="*{rate}">
+			        </td>
+			    </tr>	
+				<tr>
+				     <th>メモ</th>
+				     <td>
+				         <input type="text" th:field="*{memo}">
+				     </td>
+				 </tr>				
+            <tr>
+            <!--    <th>お店</th>
+                <td>
+                    <textarea rows="5" cols="30" th:field="*{shopl}">
+					</textarea>
+                </td>
+            </tr> -->
+        </table>
+        <!-- ボタン：登録 or 編集 -->
+        <input th:if="${lunchForm.isNew}" type="submit" value="登録">
+        <input th:unless="${lunchForm.isNew}" type="submit" value="更新">
+    </form>
+    <a th:href="@{/lunches}">戻る</a>
+</body>
+</html>

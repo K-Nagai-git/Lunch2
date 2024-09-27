@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.lunch_2.repository.LunchMapper">
+    <!-- 全件検索 -->
+    <select id="selectAll" resultType="com.example.lunch_2.entity.Lunch">
+        SELECT id, menu, shop, price, recent_date as recentDate, times, rate, memo 
+        FROM lunches
+    </select>
+    <!-- １件検索 -->
+    <select id="selectById" resultType="com.example.lunch_2.entity.Lunch">
+        SELECT id, menu, shop, price, recent_date as recentDate, times, rate, memo 
+        FROM lunches WHERE id = #{id}
+    </select>
+    <!-- 登録 -->
+    <insert id="insert">
+	    INSERT INTO lunches (menu, shop, price, recent_date, times, rate, memo) 
+	    VALUES 
+	    (#{menu}, #{shop}, #{price}, #{recentDate}, #{times}, #{rate}, #{memo})
+    </insert>
+    <!-- 更新 -->
+    <update id="update">
+	    UPDATE lunches SET menu = #{menu}, shop = #{shop},price = #{price},recent_date = #{recentDate}, times = #{times},rate = #{rate},memo = #{memo}
+	     WHERE id = #{id}
+    </update>
+    <!-- 削除 -->
+    <delete id="delete">
+        DELETE FROM lunches WHERE id = #{id}
+    </delete>
+</mapper>

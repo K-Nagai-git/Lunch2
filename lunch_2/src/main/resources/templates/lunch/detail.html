@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>ランチ詳細</title>
+</head>
+<body>
+    <h2>ランチ詳細</h2>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <td th:text="${lunch.id}"></td>
+        </tr>
+        <tr>
+            <th>メニュー</th>
+            <td th:text="${lunch.menu}"></td>
+        </tr>
+		<tr>
+		    <th>お店</th>
+		    <td th:text="${lunch.shop}"></td>
+		</tr>		
+		<tr>
+		    <th>値段</th>
+		    <td th:text="${lunch.price}"></td>
+		</tr>		
+		<tr>
+		    <th>前回利用日</th>
+			<td th:text="${lunch.recentDate}"></td>
+		</tr>	
+		<tr>
+		    <th>回数</th>
+		    <td th:text="${lunch.times}"></td>
+		</tr>			
+		<tr>
+		    <th>評価</th>
+		    <td th:text="${lunch.rate}"></td>
+		</tr>			
+		<tr>
+		    <th>メモ</th>
+		    <td th:text="${lunch.memo}"></td>
+		</tr>			
+    </table>
+	<!-- ▽▽▽▽▽ 13.10 ▽▽▽▽▽ -->
+	<a th:href="@{/lunches/edit/{id}(id=${lunch.id})}">編集</a>
+	<!-- △△△△△ 13.10 △△△△△ -->
+	<!-- ▽▽▽▽▽ 13.12 ▽▽▽▽▽ -->
+	   <form th:action="@{/lunches/delete/{id}(id=${lunch.id})}" method="post">
+	       <input type="submit" value="削除">
+	   </form>
+	   <!-- △△△△△ 13.12 △△△△△ -->
+    <a th:href="@{/lunches}">ランチ一覧へ</a>
+</body>
+</html>
