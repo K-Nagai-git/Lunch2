@@ -1,5 +1,6 @@
 package com.example.lunch_2.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import com.example.lunch_2.entity.Lunch;
@@ -28,6 +29,11 @@ public interface LunchService {
 	 * 「すること」を更新します。
 	 */
 	void updateLunch(Lunch lunch);
+
+	/**
+	 * ★「利用日」を更新します。
+	 */
+	void updateRecentDate(Integer id, LocalDate recentDate);
 
 	/**
 	 * 指定されたIDの「すること」を削除します。

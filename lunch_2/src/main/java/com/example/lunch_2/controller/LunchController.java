@@ -1,5 +1,7 @@
 package com.example.lunch_2.controller;
 
+import java.time.LocalDate;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -121,6 +123,45 @@ public class LunchController {
 		return "redirect:/lunches";
 	}
 	// △△△△△ 13.7追加 △△△△△
+	
+	/**
+	 * 指定されたIDの前回利用日を更新します。
+	 */
+	@PostMapping("/today/{id}")
+	public String today(@PathVariable Integer id, Model model,
+			RedirectAttributes attributes) {
+		// IDに対応する「ランチ」を取得
+		Lunch target = lunchService.findByIdLunch(id);
+		if (target != null) {
+			
+			 // ★今日の日付を取得
+	        LocalDate today = LocalDate.now();
+
+	        // ★サービスでランチのrecentDateを今日に更新
+	        lunchService.updateRecentDate(id, today);
+			
+			// 対象データがある場合はFormへの変換
+			LunchForm form = LunchHelper.convertLunchForm(target);
+			// モデルに格納
+			model.addAttribute("lunchForm", form);
+
+			// エンティティへの変換
+			Lunch Lunch = LunchHelper.convertLunch(form);
+			// 更新処理
+			lunchService.updateLunch(Lunch);
+			// フラッシュメッセージ
+			attributes.addFlashAttribute("message", "利用日が更新されました");
+			// PRGパターン
+			return "redirect:/lunches";
+
+		} else {
+			// 対象データがない場合はフラッシュメッセージを設定
+			attributes.addFlashAttribute("errorMessage", "対象データがありません");
+			// 一覧画面へリダイレクト
+			return "redirect:/lunches";            
+		}
+	}
+	
 	// ▽▽▽▽▽ 13.11追加 ▽▽▽▽▽
 	/**
 	 * 指定されたIDの「ランチ」を削除します。

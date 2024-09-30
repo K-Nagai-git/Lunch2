@@ -1,5 +1,6 @@
 package com.example.lunch_2.service.impl;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -42,6 +43,16 @@ public class LunchServiceImpl implements LunchService {
 		lunchMapper.update(lunch);
 	}
 
+	public void todayLunch(Lunch lunch) {
+		lunchMapper.today(lunch);
+	}
+	
+	@Override
+    public void updateRecentDate(Integer id, LocalDate recentDate) {
+        // IDに基づいてランチの recentDate を更新する
+        lunchMapper.updateRecentDate(id, recentDate);
+    }
+	
 	@Override
 	public void deleteLunch(Integer id) {
 		lunchMapper.delete(id);

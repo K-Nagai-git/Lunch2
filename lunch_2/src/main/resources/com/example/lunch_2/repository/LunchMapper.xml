@@ -22,6 +22,14 @@
 	    UPDATE lunches SET menu = #{menu}, shop = #{shop},price = #{price},recent_date = #{recentDate}, times = #{times},rate = #{rate},memo = #{memo}
 	     WHERE id = #{id}
     </update>
+    
+    <!-- ★利用日更新 -->
+    <update id="updateRecentDate" parameterType="map">
+    UPDATE lunches
+    SET recent_date = #{recentDate}
+    WHERE id = #{id}
+	</update>
+    
     <!-- 削除 -->
     <delete id="delete">
         DELETE FROM lunches WHERE id = #{id}

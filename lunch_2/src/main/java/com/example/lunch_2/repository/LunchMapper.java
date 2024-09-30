@@ -1,5 +1,6 @@
 package com.example.lunch_2.repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -33,6 +34,16 @@ public interface LunchMapper {
 	 */
 	void update(Lunch lunch);
 
+	/**
+	 * 「ランチ　利用日」を更新します。
+	 */
+	void today(Lunch lunch);
+
+	/**
+	 * ★「ランチ　利用日」を更新します。
+	 */
+	void updateRecentDate(@Param("id") Integer id, @Param("recentDate") LocalDate recentDate);
+	
 	/**
 	 * 指定されたIDの「ランチ」を削除します。
 	 */
