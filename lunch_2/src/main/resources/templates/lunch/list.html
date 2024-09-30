@@ -26,6 +26,8 @@
 				<th	style="width: 5%;">回数</th>
 				<th	style="width: 5%;">評価</th>
 				<th	style="width: 20%;">メモ</th>
+				<th	style="width: 10%;">今日利用</th>
+				<th	style="width: 10%;">詳細</th>
             </tr>
         </thead>
         <tbody>
@@ -38,6 +40,11 @@
 				<td th:text="${lunch.times}"></td>
 				<td th:text="${lunch.rate}"></td>
 				<td th:text="${lunch.memo}"></td>
+				<td>
+				    <a th:href="@{/lunches/{id}(id=${lunch.id})}">
+				        今日利用
+				    </a>
+				</td>				
                 <td>
                     <a th:href="@{/lunches/{id}(id=${lunch.id})}">
                         詳細
