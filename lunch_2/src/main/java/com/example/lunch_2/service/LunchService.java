@@ -33,7 +33,7 @@ public interface LunchService {
 	/**
 	 * ★「利用日」を更新します。
 	 */
-	void updateRecentDate(Integer id, LocalDate recentDate);
+	void updateRecentDate(Integer id, LocalDate recentDate,Integer times);
 
 	/**
 	 * 指定されたIDの「すること」を削除します。

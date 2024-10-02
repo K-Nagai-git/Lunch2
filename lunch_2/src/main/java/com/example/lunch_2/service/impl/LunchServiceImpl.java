@@ -48,9 +48,9 @@ public class LunchServiceImpl implements LunchService {
 	}
 	
 	@Override
-    public void updateRecentDate(Integer id, LocalDate recentDate) {
+    public void updateRecentDate(Integer id, LocalDate recentDate,Integer times) {
         // IDに基づいてランチの recentDate を更新する
-        lunchMapper.updateRecentDate(id, recentDate);
+        lunchMapper.updateRecentDate(id, recentDate,times);
     }
 	
 	@Override

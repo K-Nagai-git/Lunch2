@@ -134,20 +134,25 @@ public class LunchController {
 	@PostMapping("/today/{id}")
 	public String today(@PathVariable Integer id, Model model,
 			RedirectAttributes attributes) {
-		// IDに対応する「ランチ」を取得
+	
+		// IDに対応する「ランチ」を取得-1       
+		Lunch target = lunchService.findByIdLunch(id);
+		int times=target.getTimes()+1;
+		System.out.println("times "+times);
 		
 		 // ★今日の日付を取得
         LocalDate today = LocalDate.now();
         // ★サービスでランチのrecentDateを今日に更新
-        lunchService.updateRecentDate(id, today);
-		
-		Lunch target = lunchService.findByIdLunch(id);
-		System.out.println("target "+target);
+        lunchService.updateRecentDate(id, today, times);
+
+		// IDに対応する「ランチ」を取得-2       
+		target = lunchService.findByIdLunch(id);
+
 		if (target != null) {
 			
 			// 対象データがある場合はFormへの変換
 			LunchForm form = LunchHelper.convertLunchForm(target);
-			System.out.println("form "+form);
+			System.out.println("form "+form.getTimes());
 						
 			// モデルに格納
 			model.addAttribute("lunchForm", form);

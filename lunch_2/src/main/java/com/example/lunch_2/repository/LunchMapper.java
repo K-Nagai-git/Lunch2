@@ -42,7 +42,7 @@ public interface LunchMapper {
 	/**
 	 * ★「ランチ　利用日」を更新します。
 	 */
-	void updateRecentDate(@Param("id") Integer id, @Param("recentDate") LocalDate recentDate);
+	void updateRecentDate(@Param("id") Integer id, @Param("recentDate") LocalDate recentDate,@Param("times") Integer times);
 	
 	/**
 	 * 指定されたIDの「ランチ」を削除します。

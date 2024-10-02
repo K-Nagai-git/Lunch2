@@ -6,7 +6,7 @@
 <body>
     <!-- タイトル：登録 or 編集 -->
     <h2 th:if="${lunchForm.isNew}">新規ランチ登録</h2>
-    <h2 th:unless="${lunchForm.isNew}">ランチ編集</h2>
+    <h2 th:unless="${lunchForm.isNew}">ランチデータ修正</h2>
     <!-- アクション：登録 or 編集 -->
     <form th:action="${lunchForm.isNew} ? @{/lunches/save} : @{/lunches/update}"
         th:object="${lunchForm}" method="post">
@@ -37,11 +37,13 @@
 				      <input type="date" th:field="*{recentDate}">
 				  </td>
 			  </tr> -->
+			  
 			  <tr>
 			      <th>前回利用日</th>
 			      <td>
-					<!-- 日付の入力フィールド -->
-					<input type="date" th:field="*{recentDate}">
+					<!-- 新規の場合は固定日付、そうでない場合は入力された日付を表示 -->
+					<input type="date" th:field="*{recentDate}" 
+					       th:value="${lunchForm.isNew} ? '2024-01-01' : *{recentDate}" />			
 			      </td>
 			  </tr>			  
 			  
@@ -64,23 +66,19 @@
 				     </td>
 				 </tr>				
             <tr>
-            <!--    <th>お店</th>
-                <td>
-                    <textarea rows="5" cols="30" th:field="*{shopl}">
-					</textarea>
-                </td>
-            </tr> -->
         </table>
         <!-- ボタン：登録 or 編集 -->
         <input th:if="${lunchForm.isNew}" type="submit" value="登録">
-        <input th:unless="${lunchForm.isNew}" type="submit" value="更新">
+        <input th:unless="${lunchForm.isNew}" type="submit" value="修正">
 	
     </form>
 	<!-- ▽▽▽▽▽ 13.12 ▽▽▽▽▽ -->
+			<h2 th:unless="${lunchForm.isNew}">
 		   <form th:action="@{/lunches/delete/{id}(id=${lunchForm.id})}" method="post">
 		       <input type="submit" value="削除">
 		   </form>
-		   <!-- △△△△△ 13.12 △△△△△ -->	
+		   </h2>
+		   	<!-- △△△△△ 13.12 △△△△△ -->	
     <a th:href="@{/lunches}">戻る</a>
 </body>
 </html>
