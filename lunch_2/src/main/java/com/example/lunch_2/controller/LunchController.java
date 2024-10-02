@@ -35,7 +35,6 @@ public class LunchController {
 	@GetMapping
 	public String list(Model model) {
 		model.addAttribute("lunches", lunchService.findAllLunch());
-		//        System.out.println(model);
 		return "lunch/list";
 	}
 
@@ -65,6 +64,7 @@ public class LunchController {
 	 */
 	@GetMapping("/form")
 	public String newLunch(@ModelAttribute LunchForm form) {
+
 		// 新規登録画面の設定
 		form.setIsNew(true);
 		return "lunch/form";
@@ -119,6 +119,10 @@ public class LunchController {
 		lunchService.updateLunch(Lunch);
 		// フラッシュメッセージ
 		attributes.addFlashAttribute("message", "ランチが更新されました");
+
+        // ★フォームデータが正しくマッピングされているか確認
+        System.out.println("Recent Date: " + form.getRecentDate()); 	
+		
 		// PRGパターン
 		return "redirect:/lunches";
 	}
@@ -131,17 +135,20 @@ public class LunchController {
 	public String today(@PathVariable Integer id, Model model,
 			RedirectAttributes attributes) {
 		// IDに対応する「ランチ」を取得
+		
+		 // ★今日の日付を取得
+        LocalDate today = LocalDate.now();
+        // ★サービスでランチのrecentDateを今日に更新
+        lunchService.updateRecentDate(id, today);
+		
 		Lunch target = lunchService.findByIdLunch(id);
+		System.out.println("target "+target);
 		if (target != null) {
-			
-			 // ★今日の日付を取得
-	        LocalDate today = LocalDate.now();
-
-	        // ★サービスでランチのrecentDateを今日に更新
-	        lunchService.updateRecentDate(id, today);
 			
 			// 対象データがある場合はFormへの変換
 			LunchForm form = LunchHelper.convertLunchForm(target);
+			System.out.println("form "+form);
+						
 			// モデルに格納
 			model.addAttribute("lunchForm", form);
 

@@ -21,7 +21,7 @@
                 <th	style="width: 5%;">ID</th>
                 <th	style="width: 15%;">メニュー</th>
                 <th	style="width: 15%;">お店</th>
-				<th	style="width: 10%;">値段</th>
+				<th	style="width: 5%;">値段</th>
 				<th	style="width: 10%;">前回利用日</th>
 				<th	style="width: 5%;">回数</th>
 				<th	style="width: 5%;">評価</th>
@@ -32,13 +32,13 @@
         </thead>
         <tbody>
             <tr th:each="lunch : ${lunches}">
-                <td th:text="${lunch.id}"></td>
+				<td th:text="${lunch.id}" style="text-align: center;"></td>				
                 <td th:text="${lunch.menu}"></td>
 				<td th:text="${lunch.shop}"></td>
-				<td th:text="${lunch.price}"></td>
-				<td th:text="${lunch.recentDate}"></td>
-				<td th:text="${lunch.times}"></td>
-				<td th:text="${lunch.rate}"></td>
+				<td th:text="${lunch.price}" style="text-align: right;"></td>
+				<td th:text="${lunch.recentDate}" style="text-align: center;"></td>
+				<td th:text="${lunch.times}" style="text-align: center;"></td>
+				<td th:text="${lunch.rate}" style="text-align: center;"></td>
 				<td th:text="${lunch.memo}"></td>
 				<td>
 				    <!-- ボタンをクリックして日付を変更 -->

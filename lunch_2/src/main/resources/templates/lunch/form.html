@@ -30,13 +30,21 @@
 			      <td>
 			          <input type="text" th:field="*{price}">
 			      </td>
-			  </tr>	
+<!--			  </tr>	
 			  <tr>
 			  	  <th>前回利用日</th>
 				  <td>
 				      <input type="date" th:field="*{recentDate}">
 				  </td>
-			  </tr>		 
+			  </tr> -->
+			  <tr>
+			      <th>前回利用日</th>
+			      <td>
+					<!-- 日付の入力フィールド -->
+					<input type="date" th:field="*{recentDate}">
+			      </td>
+			  </tr>			  
+			  
 			  <tr>
 			       <th>回数</th>
 			       <td>
@@ -66,7 +74,13 @@
         <!-- ボタン：登録 or 編集 -->
         <input th:if="${lunchForm.isNew}" type="submit" value="登録">
         <input th:unless="${lunchForm.isNew}" type="submit" value="更新">
+	
     </form>
+	<!-- ▽▽▽▽▽ 13.12 ▽▽▽▽▽ -->
+		   <form th:action="@{/lunches/delete/{id}(id=${lunchForm.id})}" method="post">
+		       <input type="submit" value="削除">
+		   </form>
+		   <!-- △△△△△ 13.12 △△△△△ -->	
     <a th:href="@{/lunches}">戻る</a>
 </body>
 </html>
