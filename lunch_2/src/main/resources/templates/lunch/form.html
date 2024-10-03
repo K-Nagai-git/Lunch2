@@ -13,6 +13,11 @@
         <!-- idは更新時に必要のため、hiddenで持つ -->
         <input type="hidden" th:field="*{id}">
         <table>
+			<tr th:unless="${lunchForm.isNew}">	
+			     <th>ID</th>
+				 <td th:text="${id}"></td>
+			 </tr>			 
+			 
             <tr>
                 <th>メニュー</th>
                 <td>
@@ -38,21 +43,21 @@
 				  </td>
 			  </tr> -->
 			  
-			  <tr>
-			      <th>前回利用日</th>
-			      <td>
-					<!-- 新規の場合は固定日付、そうでない場合は入力された日付を表示 -->
-					<input type="date" th:field="*{recentDate}" 
-					       th:value="${lunchForm.isNew} ? '2024-01-01' : *{recentDate}" />			
-			      </td>
-			  </tr>			  
-			  
-			  <tr>
-			       <th>回数</th>
-			       <td>
-			           <input type="text" th:field="*{times}">
-			       </td>
-			   </tr>	
+			  <!-- 新規登録の場合は表示しない -->
+			  		  <tr th:unless="${lunchForm.isNew}">
+			  		      <th>前回利用日</th>
+			  		      <td>
+			  				<input type="date" th:field="*{recentDate}">	
+			  		      </td>
+			  		  </tr>
+			  		  
+			  		  <tr th:unless="${lunchForm.isNew}">
+			  		       <th>回数</th>
+			  		       <td>
+			  		           <input type="text" th:field="*{times}">
+			  		       </td>
+			  		   </tr>
+					   			   	
 			   <tr>
 			        <th>評価</th>
 			        <td>

@@ -4,7 +4,7 @@
     <!-- 全件検索 -->
     <select id="selectAll" resultType="com.example.lunch_2.entity.Lunch">
         SELECT id, menu, shop, price, recent_date as recentDate, times, rate, memo 
-        FROM lunches ORDER BY recentDate,rate
+        FROM lunches ORDER BY recentDate,rate,id
     </select>
     <!-- １件検索 -->
     <select id="selectById" resultType="com.example.lunch_2.entity.Lunch">

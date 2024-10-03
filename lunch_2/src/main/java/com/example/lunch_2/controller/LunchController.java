@@ -1,6 +1,7 @@
 package com.example.lunch_2.controller;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -76,6 +77,12 @@ public class LunchController {
 	@PostMapping("/save")
 	public String create(LunchForm form,RedirectAttributes attributes) {
 		// エンティティへの変換
+        // 文字列を LocalDate に変換
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate date = LocalDate.parse("2024-01-01", formatter);
+        // 変換した LocalDate を recentDate にセット
+        form.setRecentDate(date);
+		form.setTimes(0);
 		Lunch Lunch = LunchHelper.convertLunch(form);
 		// 登録実行
 		lunchService.insertLunch(Lunch);
